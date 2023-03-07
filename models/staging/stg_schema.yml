@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+    - name: stg_order_data
+      description: "Order_data staging"
+      columns:
+        ### PK
+          - name: id_order
+            tests:
+                - unique
+                - not_null
