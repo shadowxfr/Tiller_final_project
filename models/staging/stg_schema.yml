@@ -10,3 +10,12 @@ models:
             tests:
                 - unique
                 - not_null
+
+    - name: stg_order_line_P
+      description: "Nettoyage order_line"
+      columns:
+        ### PK
+          - name: id_order_line
+            tests :
+              - unique
+              - not_null                
