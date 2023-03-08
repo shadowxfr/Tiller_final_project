@@ -1,3 +1,5 @@
+{{config(materialized='table')}}
+
 SELECT
 -- pk
 CAST(id_order_line AS STRING) AS id_order_line,

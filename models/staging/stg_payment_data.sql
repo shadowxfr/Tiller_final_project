@@ -1,3 +1,4 @@
+{{config(materialized='table')}}
 
 SELECT
 CAST(id_pay AS STRING) AS id_pay,
