@@ -28,3 +28,17 @@ models:
        tests:
          - unique
          - not_null
+
+  - name: order_per_day
+    description: "Commandes par jour et par restaurant"
+    tests:
+    ## PK
+      - unique:
+          column_name: "(date_date || '-' || id_store)"
+    columns:
+      - name: date_date
+        tests :
+          - not_null
+      - name: id_store
+        tests :
+          - not_null
