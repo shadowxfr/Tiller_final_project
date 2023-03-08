@@ -13,6 +13,7 @@
 
 SELECT
 id_order,
+id_store,
 id_table,
 EXTRACT(HOUR FROM date_opened) AS heure,
   DATE(date_opened) AS date_date,
