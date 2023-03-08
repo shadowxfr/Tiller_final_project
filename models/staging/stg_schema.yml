@@ -2,7 +2,7 @@ version: 2
 
 models:
 
-  - name: stg_order_line_P
+  - name: stg_order_line
     description: "Nettoyage order_line"
     columns:
      ### PK

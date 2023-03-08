@@ -12,7 +12,7 @@ CASE
     THEN "ticket_restaurant_carte"
     ELSE lower(dim_type)
 END AS payment_type
-FROM `tiller-final-project.tiller.payment_data`;
+FROM `tiller-final-project.tiller.payment_data`
 
 
 --Checked primary key unicity and not null values.
