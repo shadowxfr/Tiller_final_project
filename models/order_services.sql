@@ -15,16 +15,20 @@ SELECT
 o.id_order,
 o.id_store,
 o.id_table,
-EXTRACT(HOUR FROM o.date_opened) AS heure,
+EXTRACT(HOUR FROM o.date_opened) AS hour_hour,
   DATE(o.date_opened) AS date_date,
-  EXTRACT(YEAR FROM o.date_opened) AS annee,
-  EXTRACT(DAYOFWEEK FROM o.date_opened) AS jour,
+  EXTRACT(YEAR FROM o.date_opened) AS year_year,
+  EXTRACT(DAYOFWEEK FROM o.date_opened) AS day_day,
+CASE
+    WHEN id_table is NULL then 1
+    ELSE 0
+END as takeaway,
 CASE 
-  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN 1 
-  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN 2 
-  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 23 THEN 3
-  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 10 THEN 4
-  ELSE NULL
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN 1 
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN 2 
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 23 THEN 3
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 10 THEN 4
+    ELSE NULL
 END as services, 
 p.payment_type
 
