@@ -1,0 +1,44 @@
+version: 2
+
+models:
+
+  - name: order_line
+    description: "Ticket par ligne"
+    columns:
+     ### PK
+      - name: id_order_line
+        tests :
+          - unique
+          - not_null                
+
+  - name: payment_data
+    description: "Infos de paiement"
+    columns:
+    #### PK #####
+      - name: id_pay
+        tests:
+          - unique
+          - not_null
+
+  - name: order_data
+    description: "Infos sur les commandes"
+    columns:
+    ### PK
+     - name: id_order
+       tests:
+         - unique
+         - not_null
+
+  - name: order_per_day
+    description: "Commandes par jour et par restaurant"
+    tests:
+    ## PK
+      - unique:
+          column_name: "(date_date || '-' || id_store)"
+    columns:
+      - name: date_date
+        tests :
+          - not_null
+      - name: id_store
+        tests :
+          - not_null

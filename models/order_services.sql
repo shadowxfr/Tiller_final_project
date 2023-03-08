@@ -12,21 +12,24 @@
 --annee,
 
 SELECT
-id_order,
-id_store,
-id_table,
-EXTRACT(HOUR FROM date_opened) AS heure,
-  DATE(date_opened) AS date_date,
-  EXTRACT(YEAR FROM date_opened) AS annee,
-  EXTRACT(DAYOFWEEK FROM date_opened) AS jour,
+o.id_order,
+o.id_store,
+o.id_table,
+EXTRACT(HOUR FROM o.date_opened) AS heure,
+  DATE(o.date_opened) AS date_date,
+  EXTRACT(YEAR FROM o.date_opened) AS annee,
+  EXTRACT(DAYOFWEEK FROM o.date_opened) AS jour,
 CASE 
-  WHEN EXTRACT(HOUR FROM date_opened) BETWEEN 11 AND 14 THEN 1 
-  WHEN EXTRACT(HOUR FROM date_opened) BETWEEN 15 AND 17 THEN 2 
-  WHEN EXTRACT(HOUR FROM date_opened) BETWEEN 18 AND 23 THEN 3
-  WHEN EXTRACT(HOUR FROM date_opened) BETWEEN 0 AND 10 THEN 4
+  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN 1 
+  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN 2 
+  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 23 THEN 3
+  WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 10 THEN 4
   ELSE NULL
-  END as services
-  
-FROM tiller-final-project.tiller_prod_staging.stg_order_data
+END as services, 
+p.payment_type
 
--- pour payment type faire un left join de cette table + table 
+FROM {{ ref('stg_order_data') }} o 
+LEFT JOIN {{ ref('stg_payment_data') }} p using (id_order)
+
+
+-- pour payment type faire un left join de cette table + table
