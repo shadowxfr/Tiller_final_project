@@ -2,8 +2,8 @@ version: 2
 
 models:
 
-  - name: stg_order_line_P
-    description: "Nettoyage order_line"
+  - name: order_line
+    description: "Ticket par ligne"
     columns:
      ### PK
       - name: id_order_line
@@ -11,8 +11,8 @@ models:
           - unique
           - not_null                
 
-  - name: stg_payment_data
-    description: "Cleaning payment_data"
+  - name: payment_data
+    description: "Infos de paiement"
     columns:
     #### PK #####
       - name: id_pay
@@ -20,11 +20,11 @@ models:
           - unique
           - not_null
 
-  - name: stg_order_data
-    description: "Order_data staging"
+  - name: order_data
+    description: "Infos sur les commandes"
     columns:
     ### PK
-      - name: id_order
-        tests:
+     - name: id_order
+       tests:
          - unique
          - not_null
