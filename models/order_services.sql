@@ -26,6 +26,7 @@ CASE
   WHEN EXTRACT(HOUR FROM date_opened) BETWEEN 0 AND 10 THEN 4
   ELSE NULL
   END as services
+  
 FROM tiller-final-project.tiller_prod_staging.stg_order_data
 
 -- pour payment type faire un left join de cette table + table 
