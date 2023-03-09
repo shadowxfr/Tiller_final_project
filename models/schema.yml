@@ -42,3 +42,12 @@ models:
       - name: id_store
         tests :
           - not_null
+
+  - name: order_services
+    description: "Infos sur les différents services de la journée"
+    columns:
+    ### PK
+     - name: id_order
+       tests:
+         - unique
+         - not_null
