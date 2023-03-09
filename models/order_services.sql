@@ -28,10 +28,10 @@ CASE
     ELSE 0
 END as takeaway,
 CASE 
-    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN "1_midi"
-    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN "2_après-midi"
-    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 23 THEN "3_soir"
-    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 10 THEN "4_matin"
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN "2_midi"
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN "3_après-midi"
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 23 THEN "4_soir"
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 10 THEN "1_matin"
     ELSE NULL
 END as services, 
 CASE
