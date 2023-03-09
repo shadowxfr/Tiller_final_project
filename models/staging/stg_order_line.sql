@@ -19,9 +19,9 @@ ROUND(m_tax_percent,2) AS m_tax_percent,
 ROUND(m_discount_amount,2) AS m_discount_amount,
 -- minuscule et remplacement des espaces par underscore
 LOWER (dim_type) AS order_line_type,
-LOWER (TRIM (dim_category, "_")) AS dim_category,
-LOWER (TRIM (dim_name, "_")) AS dim_name,
-LOWER (TRIM (dim_feature_type, "_")) AS dim_feature_type,
+LOWER (TRIM (dim_category, " ")) AS dim_category,
+LOWER (TRIM (dim_name, " ")) AS dim_name,
+LOWER (TRIM (dim_feature_type, " ")) AS dim_feature_type,
 -- modification de la catégorie GRAM en Kg 
 CASE
   WHEN REGEXP_CONTAINS(LOWER(dim_unit_measure), "kilogram") THEN "Kg"
