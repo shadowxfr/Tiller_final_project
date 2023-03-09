@@ -1,3 +1,5 @@
+{{config(materialized='table')}}
+
 SELECT l.*,
 s.id_store,
 s.store_type

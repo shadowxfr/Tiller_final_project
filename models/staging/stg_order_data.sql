@@ -25,7 +25,7 @@ date_closed,
 -- order
 LOWER(dim_status) AS order_status,
 CASE
-  WHEN dim_source IS NULL THEN "other"
+  WHEN dim_source IS NULL THEN "autre"
   WHEN dim_source = "Tiller iPAD" THEN "tiller-ipad"
   WHEN dim_source = "Tiller iPod" THEN "tiller-ipod"
   ELSE LOWER(dim_source)

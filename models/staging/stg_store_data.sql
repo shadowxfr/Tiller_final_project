@@ -1,3 +1,5 @@
+{{config(materialized='table')}}
+
 SELECT
 CAST(id_store AS STRING) AS id_store,
 CASE

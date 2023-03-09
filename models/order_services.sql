@@ -1,3 +1,5 @@
+{{config(materialized='table')}}
+
 -- Créer table avec order_id, id_table 
 --(a emporter = 0, sur place = 1),
 --catégorie des services 
