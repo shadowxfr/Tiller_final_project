@@ -45,9 +45,14 @@ models:
 
   - name: order_services
     description: "Infos sur les différents services de la journée"
+    tests:
+    ## PK
+      - unique:
+          column_name: "(id_order || '-' || id_pay)"
     columns:
-    ### PK
-     - name: id_order
-       tests:
-         - unique
-         - not_null
+      - name: id_order
+        tests :
+          - not_null
+      - name: id_pay
+        tests :
+          - not_null

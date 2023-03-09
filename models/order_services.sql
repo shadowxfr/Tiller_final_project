@@ -13,6 +13,10 @@
 
 SELECT
 o.id_order,
+CASE
+    WHEN p.id_pay IS NULL THEN "no_id"
+    ELSE p.id_pay
+END AS id_pay,
 o.id_store,
 o.id_table,
 EXTRACT(HOUR FROM o.date_opened) AS hour_hour,
@@ -30,7 +34,10 @@ CASE
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 10 THEN "4_matin"
     ELSE NULL
 END as services, 
-p.payment_type
+CASE
+    WHEN p.payment_type IS NULL THEN "paiement_non_renseigne"
+    ELSE p.payment_type
+END AS payment_type
 
 FROM {{ ref('stg_order_data') }} o 
 LEFT JOIN {{ ref('stg_payment_data') }} p using (id_order)
