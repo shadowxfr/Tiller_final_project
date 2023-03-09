@@ -22,11 +22,11 @@ LOWER (dim_type) AS order_line_type,
 LOWER (REPLACE (dim_category, " ", "_")) AS dim_category,
 LOWER (REPLACE (dim_name, " ", "_")) AS dim_name,
 LOWER (REPLACE (dim_feature_type, " ", "_")) AS dim_feature_type,
--- modification de la catégorie GRAM en KILOGRAM 
+-- modification de la catégorie GRAM en Kg 
 CASE
-  WHEN REGEXP_CONTAINS(LOWER(dim_unit_measure), "kilogram") THEN "kilogram"
-  WHEN (LOWER(dim_unit_measure)= "gram") THEN "kilogram"
-  ELSE "unit"
+  WHEN REGEXP_CONTAINS(LOWER(dim_unit_measure), "kilogram") THEN "Kg"
+  WHEN (LOWER(dim_unit_measure)= "gram") THEN "Kg"
+  ELSE "unite"
 END AS dim_unit_measure,
 
 CASE 
