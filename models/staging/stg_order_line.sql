@@ -2,35 +2,37 @@
 
 SELECT
 -- pk
-CAST(id_order_line AS STRING) AS id_order_line,
-CAST(id_order AS STRING) AS id_order,
+CAST(l.id_order_line AS STRING) AS id_order_line,
+CAST(l.id_order AS STRING) AS id_order,
 -- dates
-date_opended AS date_opened,
-date_created,
+l.date_opended AS date_opened,
+l.date_created,
+--stores
+d.id_store,
 -- conversion des gram en kg --
-IF (dim_unit_measure = "GRAM",m_quantity/1000,m_quantity) as m_quantity,
+IF (l.dim_unit_measure = "GRAM",l.m_quantity/1000,l.m_quantity) as m_quantity,
 -- Arrondir les prix
-round(m_unit_price,2) as m_unit_price,
-round(m_unit_price_exc_vat,2) as m_unit_price_exc_vat,
-round(m_total_price_inc_vat,2) as m_total_price_inc_vat,
-round(m_total_price_exc_vat,2) as m_total_price_exc_vat,
+round(l.m_unit_price,2) as m_unit_price,
+round(l.m_unit_price_exc_vat,2) as m_unit_price_exc_vat,
+round(l.m_total_price_inc_vat,2) as m_total_price_inc_vat,
+round(l.m_total_price_exc_vat,2) as m_total_price_exc_vat,
 -- 2 chiffres après la virgule
-ROUND(m_tax_percent,2) AS m_tax_percent,
-ROUND(m_discount_amount,2) AS m_discount_amount,
+ROUND(l.m_tax_percent,2) AS m_tax_percent,
+ROUND(l.m_discount_amount,2) AS m_discount_amount,
 -- minuscule et remplacement des espaces par underscore
-LOWER (dim_type) AS order_line_type,
-LOWER (TRIM (dim_category, " ")) AS dim_category,
-LOWER (TRIM (dim_name, " ")) AS dim_name,
-LOWER (TRIM (dim_feature_type, " ")) AS dim_feature_type,
+LOWER (l.dim_type) AS order_line_type,
+LOWER (TRIM (l.dim_category, " ")) AS dim_category,
+LOWER (TRIM (l.dim_name, " ")) AS dim_name,
+LOWER (TRIM (l.dim_feature_type, " ")) AS dim_feature_type,
 -- modification de la catégorie GRAM en Kg 
 CASE
-  WHEN REGEXP_CONTAINS(LOWER(dim_unit_measure), "kilogram") THEN "Kg"
-  WHEN (LOWER(dim_unit_measure)= "gram") THEN "Kg"
+  WHEN REGEXP_CONTAINS(LOWER(l.dim_unit_measure), "kilogram") THEN "Kg"
+  WHEN (LOWER(l.dim_unit_measure)= "gram") THEN "Kg"
   ELSE "unite"
 END AS dim_unit_measure,
 
 CASE 
-WHEN lower(dim_category) IN ("ae les alcools"
+WHEN lower(l.dim_category) IN ("ae les alcools"
 , "drinks lunch"
 , "alcool"
 , "alcool salle"
@@ -176,7 +178,7 @@ WHEN lower(dim_category) IN ("ae les alcools"
 , "sicile"
 , "grover\u0027s rouge")
 THEN "alcools"
-WHEN lower(dim_category) IN ("ae autres boissons"
+WHEN lower(l.dim_category) IN ("ae autres boissons"
 , "ae boissons chaudes"
 , "ae boissons fraiches"
 , "a emporter"
@@ -251,7 +253,7 @@ WHEN lower(dim_category) IN ("ae autres boissons"
 , "épiceries"
 , "les petits +")
 THEN "softs"
-WHEN lower(dim_category) IN ("add"
+WHEN lower(l.dim_category) IN ("add"
 , "accompagnements"
 , "ae les sucres"
 , "ae les sucrés"
@@ -420,9 +422,10 @@ WHEN lower(dim_category) IN ("add"
 , "various"
 , "wonder box / smart box")
 THEN "nourriture"
-WHEN lower(dim_category) IN ("vente directe", "interflora") 
+WHEN lower(l.dim_category) IN ("vente directe", "interflora") 
 THEN "fleurs"
 ELSE "autres"
 END AS categorie
 
-FROM `tiller-final-project.tiller.order_line` 
+FROM `tiller-final-project.tiller.order_line` l
+LEFT JOIN `tiller-final-project.tiller.order_data` d ON l.id_order = d.id_order

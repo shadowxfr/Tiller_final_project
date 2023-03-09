@@ -28,3 +28,12 @@ models:
         tests:
          - unique
          - not_null
+
+  - name: stg_store_data
+    description: "Store_data staging"
+    columns:
+    ### PK
+      - name: id_store
+        tests:
+         - unique
+         - not_null
