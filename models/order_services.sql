@@ -27,7 +27,7 @@ EXTRACT(HOUR FROM o.date_opened) AS hour_hour,
   EXTRACT(DAYOFWEEK FROM o.date_opened) AS day_day,
 CASE
     WHEN p.payment_type in ("livraison", "uber eats", "deliveroo", "alloresto") then "livraison"
-    ELSE "Sur Place"
+    ELSE "sur place"
 END as Livraisonsurplace,
 CASE 
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN "2_midi"
