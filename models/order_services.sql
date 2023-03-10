@@ -39,7 +39,8 @@ END as services,
 CASE
     WHEN p.payment_type IS NULL THEN "paiement_non_renseigne"
     ELSE p.payment_type
-END AS payment_type
+END AS payment_type,
+p.m_amount
 
 FROM {{ ref('stg_order_data') }} o 
 LEFT JOIN {{ ref('stg_payment_data') }} p using (id_order)
