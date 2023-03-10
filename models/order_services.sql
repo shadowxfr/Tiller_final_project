@@ -28,7 +28,7 @@ EXTRACT(HOUR FROM o.date_opened) AS hour_hour,
 CASE
     WHEN p.payment_type in ("livraison", "uber eats", "deliveroo", "alloresto") then "livraison"
     ELSE "sur place"
-END as Livraisonsurplace,
+END as delivery_eat_in,
 CASE 
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN "2_midi"
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN "3_après-midi"
