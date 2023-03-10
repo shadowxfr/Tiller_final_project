@@ -26,9 +26,9 @@ EXTRACT(HOUR FROM o.date_opened) AS hour_hour,
   EXTRACT(YEAR FROM o.date_opened) AS year_year,
   EXTRACT(DAYOFWEEK FROM o.date_opened) AS day_day,
 CASE
-    WHEN id_table is NULL then 1
-    ELSE 0
-END as takeaway,
+    WHEN p.payment_type in ("livraison", "uber eats", "deliveroo", "alloresto") then "livraison"
+    ELSE "sur place"
+END as delivery_eat_in,
 CASE 
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN "2_midi"
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN "3_après-midi"
