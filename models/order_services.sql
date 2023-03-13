@@ -32,7 +32,8 @@ END as delivery_eat_in,
 CASE 
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 11 AND 14 THEN "2_midi"
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 15 AND 17 THEN "3_après-midi"
-    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 4 THEN "4_soir"
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 18 AND 24 THEN "4_soir"
+    WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 0 AND 4 THEN "4_soir"
     WHEN EXTRACT(HOUR FROM o.date_opened) BETWEEN 5 AND 10 THEN "1_matin"
     ELSE NULL
 END as services, 
