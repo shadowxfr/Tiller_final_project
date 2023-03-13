@@ -37,7 +37,7 @@ CASE
     ELSE NULL
 END as services, 
 CASE
-    WHEN p.payment_type IS NULL THEN "paiement_non_renseigne"
+    WHEN p.payment_type IS NULL THEN "nc"
     ELSE p.payment_type
 END AS payment_type,
 p.m_amount
