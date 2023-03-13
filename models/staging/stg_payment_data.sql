@@ -10,6 +10,9 @@ CASE
     OR lower(dim_type) = "carte ticket restaurant" 
     OR lower(dim_type) = "cb_ticket_resto"
     THEN "ticket_restaurant_carte"
+    WHEN lower(dim_type) = "card" THEN "carte"
+    WHEN lower(dim_type) = "cash" THEN "espèces"
+    WHEN lower(dim_type) = "paiement_non_renseigne" THEN "nc"
     ELSE lower(dim_type)
 END AS payment_type
 FROM `tiller-final-project.tiller.payment_data`
