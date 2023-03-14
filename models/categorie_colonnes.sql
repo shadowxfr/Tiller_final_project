@@ -26,7 +26,7 @@ CASE
   WHEN categorie = "fleurs" THEN 1
   ELSE 0
 END AS fleurs,
-FROM {{ ref('stg_order_line') }})
+FROM {{ ref('order_line') }})
 
 SELECT
 id_order,
