@@ -1,3 +1,5 @@
+{{config(materialized='table')}}
+
 WITH col_categories AS (
 SELECT
 id_order,
